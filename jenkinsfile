@@ -1,20 +1,5 @@
-node {
-    stage('Checkout') {
-        checkout scm
-    }
-
-    stage('Install Jenkins via Ansible') {
-        dir('ansible') {
-            sh 'ansible-playbook -i inventory site.yml'
-        }
-    }
-
-    stage('Slack Notification') {
-        slackSend(
-            channel: 'build-status',
-            color: 'good',
-            message: "✅ Pipeline completed successfully",
-            tokenCredentialId: 'slack-cred'
-        )
+stage('Install Jenkins via Ansible') {
+    steps {
+        sh 'ansible-playbook -i inventory site.yml'
     }
 }
