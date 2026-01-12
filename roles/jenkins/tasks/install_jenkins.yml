@@ -1,0 +1,71 @@
+- name: Add Jenkins repo (RedHat)
+  when: ansible_os_family == "RedHat"
+  yum_repository:
+    name: jenkins
+    description: Jenkins Repo
+    baseurl: https://pkg.jenkins.io/redhat-stable
+    gpgcheck: yes
+    gpgkey: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+- name: Add Jenkins GPG key (Debian)
+  when: ansible_os_family == "Debian"
+  get_url:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    dest: /usr/share/keyrings/jenkins-keyring.asc
+    mode: '0644'
+
+- name: Add Jenkins repository (Debian)
+  when: ansible_os_family == "Debian"
+  apt_repository:
+    repo: >
+      deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]
+      https://pkg.jenkins.io/debian-stable binary/
+    state: present
+    update_cache: yes
+
+
+- name: Install Jenkins specific version (Debian)
+  when:
+    - ansible_os_family == "Debian"
+    - jenkins_version is defined
+  apt:
+    name: "{{ jenkins_pkg }}={{ jenkins_version }}"
+    state: present
+    update_cache: yes
+
+- name: Install Jenkins latest version (Debian fallback)
+  when:
+    - ansible_os_family == "Debian"
+    - jenkins_version is not defined
+  apt:
+    name: "{{ jenkins_pkg }}"
+    state: present
+    update_cache: yes
+- name: Import Jenkins GPG key (RedHat)
+  when: ansible_os_family == "RedHat"
+  rpm_key:
+    key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+    state: present
+
+- name: Install Jenkins (RedHat)
+  when: ansible_os_family == "RedHat"
+  yum:
+    name: "{{ jenkins_pkg }}"
+    state: present
+
+
+- name: Reload systemd
+  command: systemctl daemon-reload
+
+- name: Enable and start Jenkins
+  service:
+    name: jenkins
+    state: started
+    enabled: yes
+
+- name: Enable and start Jenkins
+  service:
+    name: jenkins
+    state: started
+    enabled: yes
+

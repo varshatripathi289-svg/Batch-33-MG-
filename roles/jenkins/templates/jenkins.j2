@@ -1,0 +1,9 @@
+# Jenkins default configuration
+
+JENKINS_HOME={{ jenkins_home }}
+HTTP_PORT={{ jenkins_http_port }}
+
+JAVA_ARGS="-Djava.awt.headless=true"
+
+JENKINS_ARGS="--webroot=/var/cache/jenkins/war --httpPort={{ jenkins_http_port }}"
+
