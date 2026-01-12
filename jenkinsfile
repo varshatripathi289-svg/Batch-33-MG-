@@ -1,0 +1,9 @@
+stage('Install Jenkins') {
+    steps {
+        dir('ansible') {
+            sh '''
+            ansible-playbook -i inventory site.yml
+            '''
+        }
+    }
+}
