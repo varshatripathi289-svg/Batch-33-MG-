@@ -1,8 +1,8 @@
 [ubuntu]
-jenkins-ubuntu ansible_host=52.66.214.237 ansible_user=ubuntu
+jenkins-ubuntu ansible_host=13.200.5.35 ansible_user=ubuntu
 
 [redhat]
-jenkins-redhat ansible_host=3.109.199.192 ansible_user=ec2-user
+jenkins-redhat ansible_host=3.110.144.116 ansible_user=ec2-user
 
 [all:vars]
 ansible_ssh_private_key_file=/home/varsha-tripathi/Downloads/my_key.pem
