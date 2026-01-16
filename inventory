@@ -5,6 +5,5 @@ jenkins-ubuntu ansible_host=13.200.5.35 ansible_user=ubuntu
 jenkins-redhat ansible_host=3.110.144.116 ansible_user=ec2-user
 
 [all:vars]
-ansible_ssh_private_key_file=/home/varsha-tripathi/Downloads/my_key.pem
 ansible_python_interpreter=/usr/bin/python3
 
