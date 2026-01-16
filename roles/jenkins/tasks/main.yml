@@ -44,11 +44,39 @@
     mode: '0644'
   when: ansible_os_family == "Debian"
 
-- name: Add Jenkins APT repository
-  ansible.builtin.apt_repository:
-    repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
+- name: Install required packages (Debian)
+  apt:
+    name:
+      - ca-certificates
+      - curl
+      - gnupg
     state: present
+    update_cache: yes
   when: ansible_os_family == "Debian"
+
+- name: Create keyrings directory
+  file:
+    path: /usr/share/keyrings
+    state: directory
+    mode: '0755'
+  when: ansible_os_family == "Debian"
+
+- name: Download Jenkins GPG key
+  get_url:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    dest: /usr/share/keyrings/jenkins-keyring.asc
+    mode: '0644'
+  when: ansible_os_family == "Debian"
+
+- name: Add Jenkins APT repository
+  apt_repository:
+    repo: >
+      deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]
+      https://pkg.jenkins.io/debian-stable binary/
+    state: present
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
 
 - name: Add Jenkins repository (RHEL)
   get_url:
