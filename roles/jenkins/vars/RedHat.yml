@@ -1,4 +1,0 @@
-jenkins_pkg: jenkins
-java_pkg_amazon: java-17-amazon-corretto
-java_pkg_rhel: java-17-openjdk
-

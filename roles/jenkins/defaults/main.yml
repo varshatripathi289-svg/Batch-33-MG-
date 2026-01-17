@@ -1,4 +1,12 @@
-# jenkins_version: "2.426.3"
+jenkins_version: ""
 jenkins_http_port: 8080
 jenkins_home: /var/lib/jenkins
+jenkins_user: jenkins
+jenkins_group: jenkins
+
+java_package:
+  ubuntu: openjdk-17-jdk
+  centos: java-17-openjdk
+
+jenkins_listen_address: "0.0.0.0"
 

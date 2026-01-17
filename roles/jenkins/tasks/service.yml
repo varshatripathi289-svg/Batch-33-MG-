@@ -1,0 +1,6 @@
+- name: Enable and start Jenkins
+  service:
+    name: jenkins
+    state: started
+    enabled: true
+

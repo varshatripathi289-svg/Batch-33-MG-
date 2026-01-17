@@ -1,0 +1,7 @@
+java_package:
+  redhat: java-17-openjdk
+  centos: java-17-openjdk
+
+jenkins_repo_url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
+jenkins_key_url: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
