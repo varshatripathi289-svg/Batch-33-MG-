@@ -1,0 +1,9 @@
+#!groovy
+import jenkins.model.*
+import hudson.security.*
+
+def instance = Jenkins.getInstance()
+instance.setSecurityRealm(new HudsonPrivateSecurityRealm(false))
+instance.setAuthorizationStrategy(new hudson.security.AuthorizationStrategy.Unsecured())
+instance.save()
+

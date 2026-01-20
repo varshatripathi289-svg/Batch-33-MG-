@@ -1,0 +1,8 @@
+galaxy_info:
+  role_name: jenkins
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+

@@ -1,9 +1,0 @@
-- name: Configure Jenkins
-  template:
-    src: jenkins.j2
-    dest: /etc/default/jenkins
-    owner: root
-    group: root
-    mode: '0644'
-  notify: Restart Jenkins
-

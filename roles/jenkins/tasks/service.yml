@@ -1,6 +1,6 @@
-- name: Enable and start Jenkins
+- name: Ensure Jenkins is running
   service:
     name: jenkins
     state: started
-    enabled: true
+    enabled: yes
 

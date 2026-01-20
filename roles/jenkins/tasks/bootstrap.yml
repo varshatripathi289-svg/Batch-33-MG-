@@ -1,0 +1,14 @@
+- name: Ensure init.groovy.d exists
+  file:
+    path: /var/lib/jenkins/init.groovy.d
+    state: directory
+    owner: jenkins
+    group: jenkins
+    mode: '0755'
+
+- name: Disable Jenkins security temporarily
+  template:
+    src: disable-security.groovy.j2
+    dest: /var/lib/jenkins/init.groovy.d/00-disable-security.groovy
+  notify: Restart Jenkins
+

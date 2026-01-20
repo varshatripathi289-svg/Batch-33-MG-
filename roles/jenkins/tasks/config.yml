@@ -1,0 +1,21 @@
+- name: Configure Jenkins defaults
+  template:
+    src: jenkins.j2
+    dest: /etc/default/jenkins
+  notify: Restart Jenkins
+
+
+- name: Ensure init.groovy.d directory exists
+  file:
+    path: /var/lib/jenkins/init.groovy.d
+    state: directory
+    owner: jenkins
+    group: jenkins
+    mode: '0755'
+
+- name: Disable setup wizard & auto-create user
+  template:
+    src: init.groovy.j2
+    dest: /var/lib/jenkins/init.groovy.d/basic-security.groovy
+  notify: Restart Jenkins
+

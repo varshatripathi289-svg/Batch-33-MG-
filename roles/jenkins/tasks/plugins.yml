@@ -1,0 +1,17 @@
+- name: Wait for Jenkins to be available
+  uri:
+    url: "http://localhost:8080"
+    status_code: 200
+  register: result
+  retries: 30
+  delay: 10
+  until: result.status == 200
+
+- name: Install Jenkins plugins automatically
+  community.general.jenkins_plugin:
+    name: "{{ item }}"
+    state: present
+    timeout: 120
+  loop: "{{ jenkins_plugins }}"
+  notify: Restart Jenkins
+

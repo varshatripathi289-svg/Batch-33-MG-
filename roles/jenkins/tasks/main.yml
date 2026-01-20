@@ -1,7 +1,20 @@
 - name: Load OS specific variables
-  include_vars: "{{ ansible_os_family | lower }}.yml"
+  include_vars: "{{ ansible_os_family }}.yml"
 
+- include_tasks: prereq.yml
+- include_tasks: repo.yml
 - include_tasks: install.yml
-- include_tasks: configure.yml
 - include_tasks: service.yml
+
+# 🔥 BOOTSTRAP (disable security)
+- include_tasks: bootstrap.yml
+
+# 🔁 Restart so security is OFF
+- meta: flush_handlers
+
+# ✅ NOW plugins will install
+- include_tasks: plugins.yml
+
+# 🔒 Enable security again
+- include_tasks: config.yml
 

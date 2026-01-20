@@ -1,8 +1,0 @@
-java_package:
-  debian: openjdk-17-jdk
-  ubuntu: openjdk-17-jdk
-
-jenkins_key_url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
-jenkins_keyring: /usr/share/keyrings/jenkins-jenkins.io-keyring.gpg
-jenkins_repo_url: https://pkg.jenkins.io/debian-stable/
-
