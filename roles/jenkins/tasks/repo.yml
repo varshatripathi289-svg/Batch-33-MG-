@@ -1,29 +1,29 @@
 ---
-- name: Ensure apt HTTPS support packages are installed
+- name: Ensure prerequisites for apt over HTTPS
   ansible.builtin.apt:
     name:
       - apt-transport-https
       - ca-certificates
-      - curl
       - gnupg
-    state: present
+      - curl
     update_cache: yes
-
-- name: Create apt keyrings directory
-  ansible.builtin.file:
-    path: /etc/apt/keyrings
-    state: directory
-    mode: '0755'
-
-- name: Download Jenkins repository signing key (current)
-  ansible.builtin.get_url:
-    url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
-    dest: /etc/apt/keyrings/jenkins-keyring.asc
-    mode: '0644'
-
-- name: Add Jenkins repository
-  ansible.builtin.apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
-    filename: jenkins
     state: present
+
+- name: Create directory for apt keyrings
+  ansible.builtin.file:
+    path: /usr/share/keyrings
+    state: directory
+    mode: "0755"
+
+- name: Download Jenkins repository signing key
+  ansible.builtin.get_url:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    dest: /usr/share/keyrings/jenkins-keyring.asc
+    mode: "0644"
+
+- name: Add Jenkins apt repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
+    state: present
+    filename: jenkins
     update_cache: yes
