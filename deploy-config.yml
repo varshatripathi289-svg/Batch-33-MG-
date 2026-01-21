@@ -1,0 +1,13 @@
+SLACK_CHANNEL_NAME: build-status
+ENVIRONMENT: prod
+CODE_BASE_PATH: env/prod
+ACTION_MESSAGE: "Deploying Jenkins to PROD"
+KEEP_APPROVAL_STAGE: true
+
+GIT_REPO: https://github.com/your-org/Batch-33-MG-.git
+GIT_BRANCH: main
+
+ANSIBLE:
+  INVENTORY: inventory
+  PLAYBOOK: site.yml
+  SSH_CREDENTIAL_ID: ansible-ssh-key
