@@ -1,5 +1,5 @@
 ---
-- name: Ensure apt HTTPS support is installed
+- name: Ensure apt HTTPS support packages are installed
   ansible.builtin.apt:
     name:
       - apt-transport-https
@@ -9,15 +9,15 @@
     state: present
     update_cache: yes
 
-- name: Ensure apt keyrings directory exists
+- name: Create apt keyrings directory
   ansible.builtin.file:
     path: /etc/apt/keyrings
     state: directory
     mode: '0755'
 
-- name: Download current Jenkins GPG key
+- name: Download Jenkins repository signing key (current)
   ansible.builtin.get_url:
-    url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
     dest: /etc/apt/keyrings/jenkins-keyring.asc
     mode: '0644'
 
