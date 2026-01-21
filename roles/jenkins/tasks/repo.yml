@@ -1,10 +1,23 @@
-- name: Add Jenkins GPG key
-  apt_key:
+---
+- name: Ensure apt HTTPS support is installed
+  ansible.builtin.apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - gnupg
+      - curl
+    state: present
+    update_cache: yes
+
+- name: Download Jenkins repo key to apt keyrings
+  ansible.builtin.get_url:
     url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
-    state: present
+    dest: /etc/apt/keyrings/jenkins-keyring.asc
+    mode: '0644'
 
-- name: Add Jenkins repository
-  apt_repository:
-    repo: "deb https://pkg.jenkins.io/debian-stable binary/"
+- name: Add Jenkins apt repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
     state: present
-
+    filename: jenkins
+    update_cache: yes
