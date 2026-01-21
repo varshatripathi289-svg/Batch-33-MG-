@@ -1,12 +1,9 @@
+GIT_REPO: https://github.com/varshatripathi289-svg/Batch-33-MG-.git
+GIT_BRANCH: main
+KEEP_APPROVAL_STAGE: true
 SLACK_CHANNEL_NAME: build-status
 ENVIRONMENT: prod
-CODE_BASE_PATH: env/prod
-ACTION_MESSAGE: "Deploying Jenkins to PROD"
-KEEP_APPROVAL_STAGE: true
-
-GIT_REPO: https://github.com/your-org/Batch-33-MG-.git
-GIT_BRANCH: main
-
+ACTION_MESSAGE: "Deploying Jenkins"
 ANSIBLE:
   INVENTORY: inventory
   PLAYBOOK: site.yml
