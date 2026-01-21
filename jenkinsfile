@@ -2,15 +2,10 @@
 
 pipeline {
     agent any
-
     stages {
-        stage('Deploy with Ansible') {
+        stage('Deploy') {
             steps {
-                ansibleRun(
-                    INVENTORY: 'inventory',
-                    PLAYBOOK: 'site.yml',
-                    SSH_CREDENTIAL_ID: 'ansible-ssh-key'
-                )
+                ansibleDeploy(configFile: 'deploy-config.yml')
             }
         }
     }
